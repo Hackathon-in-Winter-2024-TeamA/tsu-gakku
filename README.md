@@ -41,9 +41,9 @@ DATABASES = {
 
 5. **アプリを起動する**  
 ```
-./start-project
+./start-services
 ```
 
 ### 備考
-- `docker-compose up`だとdepends_onで指定されていてもdbよりwebが先に立ち上がってしまいエラーが出るため、dbの起動を確認した後にwebを起動する`start-project`スクリプトを利用する
+- `docker-compose up`だとdepends_onで指定されていてもdbよりwebが先に立ち上がってしまいエラーが出るため、dbの起動を確認した後にwebを起動する`start-services`スクリプトを利用する
 - 必要に応じてSECRET_KEYを.envに追加し、settings.pyで設定をする

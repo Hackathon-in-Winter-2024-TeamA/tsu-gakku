@@ -47,3 +47,10 @@ DATABASES = {
 ### 備考
 - `docker-compose up`だとdepends_onで指定されていてもdbよりwebが先に立ち上がってしまいエラーが出るため、dbの起動を確認した後にwebを起動する`start-services.sh`スクリプトを利用する
 - 必要に応じてSECRET_KEYを.envに追加し、settings.pyで設定をする
+- requirements.txtにインストールする記載があるが、REST Frameworkを使用する場合はsettings.pyにも以下の設定を追加する
+```python
+INSTALLED_APPS = [
+    ...
+    'rest_framework',
+]
+```

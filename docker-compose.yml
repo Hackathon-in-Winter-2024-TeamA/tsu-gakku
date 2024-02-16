@@ -1,6 +1,14 @@
 version: '3.8'
 
 services:
+  expo:
+    build: ./expo
+    volumes:
+      - ./expo:/expo
+    ports:
+      - "8081:8081"
+      - "8082:8082"
+
   web:
     build: ./django
     volumes:

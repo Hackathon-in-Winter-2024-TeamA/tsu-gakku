@@ -5,12 +5,11 @@
 ```
 docker-compose run --rm expo expo init <project_name>
 ```
+  => blank/blank(TypeScript)/tabs(TypeScript)/minimal からプロジェクトに合うものを選択する
 
-- blank/blank(TypeScript)/tabs(TypeScript)/minimal からプロジェクトに合うものを選択する
-
-2. **docker-compose.ymlのworking_dirのコメントアウトを外し、プロジェクト名をinitで指定したものに変更する**
+2. **docker-compose.ymlのworking_dirのコメントアウトを外す**
 ```
-# initした後に下記コメントアウトを外し、プロジェクト名を指定する
+# initした後に下記コメントアウトを外し、プロジェクト名をinitで指定したものに変更する
 # working_dir: /expo/project_name
 ```
 

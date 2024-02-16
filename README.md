@@ -1,4 +1,4 @@
-# django-mysql-template
+# expo-django-mysql-template
 
 ## expo
 1. **expoプロジェクトを作成する**

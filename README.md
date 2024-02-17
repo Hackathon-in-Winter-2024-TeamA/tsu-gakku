@@ -13,14 +13,19 @@ docker-compose run --rm expo expo init <project_name>
 # working_dir: /expo/project_name
 ```
 
-3. **アプリの立ち上げ**
+3. **依存関係をインストールする**
+```shell
+docker-compose run expo npx expo install react-native-web react-dom @expo/metro-runtime
+```
+
+4. **アプリの立ち上げ**
 ```shell
 docker-compose up
 # expoのみ立ち上げる場合は以下
 docker-compose up expo
 ```
 
-4. **ブラウザでアクセスする**
+5. **ブラウザでアクセスする**
 - localhost:8081に接続することで画面を見ることができる
 - 立ち上げ後にブラウザにアクセスすると最初は表示までは時間がかかる 
 

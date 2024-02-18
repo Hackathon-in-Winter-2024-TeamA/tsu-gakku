@@ -4,12 +4,11 @@ services:
   expo:
     build: ./expo
     # initした後に下記コメントアウトを外し、プロジェクト名を指定する
-    # working_dir: /expo/project_name
+    working_dir: /expo/tsu-gakku
     volumes:
       - ./expo:/expo
     ports:
       - "8081:8081"
-      - "8082:8082"
     tty: true
 
   web:

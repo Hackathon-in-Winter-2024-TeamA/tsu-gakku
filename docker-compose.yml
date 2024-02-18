@@ -1,6 +1,16 @@
 version: '3.8'
 
 services:
+  expo:
+    build: ./expo
+    # initした後に下記コメントアウトを外し、プロジェクト名を指定する
+    working_dir: /expo/tsu-gakku
+    volumes:
+      - ./expo:/expo
+    ports:
+      - "8081:8081"
+    tty: true
+
   web:
     build: ./django
     volumes:

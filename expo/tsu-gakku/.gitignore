@@ -1,1 +1,35 @@
+.env
 
+# dependencies
+expo/tsu-gakku/node_modules/
+
+# Expo
+expo/tsu-gakku/.expo/
+expo/tsu-gakku/dist/
+expo/tsu-gakku/web-build/
+
+# Native
+expo/tsu-gakku/*.orig.*
+expo/tsu-gakku/*.jks
+expo/tsu-gakku/*.p8
+expo/tsu-gakku/*.p12
+expo/tsu-gakku/*.key
+expo/tsu-gakku/*.mobileprovision
+
+# Metro
+expo/tsu-gakku/.metro-health-check*
+
+# debug
+expo/tsu-gakku/npm-debug.*
+expo/tsu-gakku/yarn-debug.*
+expo/tsu-gakku/yarn-error.*
+
+# macOS
+expo/tsu-gakku/.DS_Store
+expo/tsu-gakku/*.pem
+
+# local env files
+expo/tsu-gakku/.env*.local
+
+# typescript
+expo/tsu-gakku/*.tsbuildinfo

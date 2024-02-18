@@ -1,5 +1,30 @@
-# django-mysql-template
+# expo-django-mysql-template
 
+## expo
+1. **expoプロジェクトを作成する**
+```shell
+docker-compose run --rm expo expo init <project_name>
+```
+  => blank/blank(TypeScript)/tabs(TypeScript)/minimal からプロジェクトに合うものを選択する
+
+2. **docker-compose.ymlのworking_dirのコメントアウトを外す**
+```yml
+# initした後に下記コメントアウトを外し、プロジェクト名をinitで指定したものに変更する
+# working_dir: /expo/project_name
+```
+
+3. **アプリの立ち上げ**
+```shell
+docker-compose up
+# expoのみ立ち上げる場合は以下
+docker-compose up expo
+```
+
+4. **ブラウザでアクセスする**
+- localhost:8081に接続することで画面を見ることができる
+- 立ち上げ後にブラウザにアクセスすると最初は表示までは時間がかかる 
+
+## django-mysql
 1. **.envファイルを作成する**
 ```
 # .envファイルの内容の例
@@ -12,12 +37,12 @@ SECRET_KEY=mysecretkey
 ```
 
 2. **プロジェクトを作成する**  
-```
+```shell
 docker-compose run --rm web django-admin startproject <project_name> .
 ```
 
 3. **アプリ（機能）を作成する**  
-```
+```shell
 docker-compose run --rm web python manage.py startapp <app_name>
 ```
 
@@ -40,7 +65,7 @@ DATABASES = {
 ```
 
 5. **アプリを起動する**  
-```
+```shell
 ./start-services.sh
 ```
 

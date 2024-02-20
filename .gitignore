@@ -35,6 +35,6 @@ expo/tsu-gakku/.env*.local
 expo/tsu-gakku/*.tsbuildinfo
 
 # django
-django/hackathon2401/_pycache_/
-django/tsugakku/_pycache_/
+django/hackathon2401/__pycache__/
+django/tsugakku/__pycache__/
 django/tsugakku/migrations/

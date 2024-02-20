@@ -67,6 +67,22 @@ DATABASES = {
 5. **アプリを起動する**  
 ```shell
 ./start-services.sh
+
+# ここでブラウザで見れるか確認する
+# コンテナ削除する場合、volumeも削除すること
+```
+
+6. **マイグレーション**
+```shell
+
+# docker(web)の中に入る
+docker exec -it <コンテナ名> bash
+
+# マイグレーションファイルの作成
+python manage.py makemigrations
+
+# マイグレーションの実行
+python manage.py migrate
 ```
 
 ### 備考

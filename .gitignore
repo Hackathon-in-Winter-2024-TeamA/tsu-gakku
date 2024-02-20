@@ -33,3 +33,8 @@ expo/tsu-gakku/.env*.local
 
 # typescript
 expo/tsu-gakku/*.tsbuildinfo
+
+# django
+django/hackathon2401/__pycache__/
+django/tsugakku/__pycache__/
+django/tsugakku/migrations/

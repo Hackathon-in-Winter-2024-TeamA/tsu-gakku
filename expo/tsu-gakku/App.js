@@ -1,20 +1,33 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import React from "react";
+
+import { NavigationContainer } from "@react-navigation/native";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import LogInScreen from "./src/screens/LogInScreen";
+import SignUpParentScreen from "./src/screens/SignUpParentScreen";
+import SignUpChildrenScreen from "./src/screens/SignUpChildrenScreen";
+import SignUpConfirmScreen from "./src/screens/SignUpConfirmScreen";
+import SignUpCompleteScreen from "./src/screens/SignUpCompleteScreen";
+import HomeDummy from "./src/screens/HomeDummy"; //hinakanaさんのHomeに変える
+import AttendanceCheckList from "./src/screens/AttendanceCheckList"; //出欠席確認画面
+
+const Stack = createNativeStackNavigator();
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <NavigationContainer>
+      <Stack.Navigator
+        screenOptions={{
+          headerStyle: { backgroundColor: "#FEDA30" },
+        }}
+      >
+        <Stack.Screen name="ログイン" component={LogInScreen} />
+        <Stack.Screen name="アカウント作成1" component={SignUpParentScreen} />
+        <Stack.Screen name="アカウント作成2" component={SignUpChildrenScreen} />
+        <Stack.Screen name="アカウント作成3" component={SignUpConfirmScreen} />
+        <Stack.Screen name="アカウント作成4" component={SignUpCompleteScreen} />
+        <Stack.Screen name="ホーム" component={HomeDummy} />
+        <Stack.Screen name="出欠席確認画面" component={AttendanceCheckList} />
+      </Stack.Navigator>
+    </NavigationContainer>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});

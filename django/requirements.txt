@@ -1,4 +1,4 @@
 # 適宜バージョンを指定する
-Django>=3.0,<4.0
+Django==4.2.10
 djangorestframework==3.12
 mysqlclient

@@ -6,99 +6,182 @@ import {
   TextInput,
   StyleSheet,
   Image,
+  TouchableOpacity,
+  SafeAreaView,
+  Modal,
+  Linking,
 } from "react-native";
 import Checkbox from "expo-checkbox";
 
 import YellowButton from "../components/YellowButton";
 import GrayButton from "../components/GrayButton";
+import Terms from "../components/Terms";
 
 export default function SignUpParentScreen({ navigation }) {
+  const [username, setUsername] = useState("");
+  const [nickname, setNickname] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmationpassword, setConfirmationpassword] = useState("");
   const [agreeToTerms, setAgreeToTerms] = useState(false);
+  const [termsModal, setTermsModal] = useState(false);
+
+  const openTermsModal = () => {
+    setTermsModal(true);
+  };
+
+  const closeTermsModal = () => {
+    setTermsModal(false);
+  };
 
   return (
-    <ScrollView style={styles.container}>
-      <View style={styles.inner}>
-        <View style={styles.titleRow}>
+    <View style={{ flex: 1 }}>
+      <ScrollView style={styles.container}>
+        <View style={styles.inner}>
+          <View style={styles.titleRow}>
+            <Image
+              style={styles.steps}
+              source={require("../../assets/images/step-1-4.png")}
+            />
+            <Text style={styles.titleText}>保護者さまの登録</Text>
+          </View>
+
+          <View style={styles.inputTittleRow}>
+            <Text style={styles.inputTittle}>アカウント名</Text>
+            <Image
+              style={styles.need}
+              source={require("../../assets/images/form-hissu.png")}
+            />
+          </View>
+          <TextInput
+            style={styles.input}
+            value={username}
+            onChangeText={setUsername}
+            placeholder="アカウント名"
+          />
+          <View style={styles.inputTittleRow}>
+            <Text style={styles.inputTittle}>アプリ内表示名</Text>
+            <Image
+              style={styles.need}
+              source={require("../../assets/images/form-hissu.png")}
+            />
+          </View>
+          <TextInput
+            style={styles.input}
+            value={nickname}
+            onChangeText={setNickname}
+            placeholder="アプリ内表示名"
+          />
+          <View style={styles.inputTittleRow}>
+            <Text style={styles.inputTittle}>メールアドレス</Text>
+            <Image
+              style={styles.need}
+              source={require("../../assets/images/form-hissu.png")}
+            />
+          </View>
+          <TextInput
+            style={styles.input}
+            value={email}
+            onChangeText={setEmail} // メールアドレスが変更されたときのハンドラ
+            placeholder="メールアドレス"
+            autoCapitalize="none"
+          />
+          <View style={styles.inputTittleRow}>
+            <Text style={styles.inputTittle}>パスワード</Text>
+            <Image
+              style={styles.need}
+              source={require("../../assets/images/form-hissu.png")}
+            />
+          </View>
+          <TextInput
+            style={styles.input}
+            value={password}
+            onChangeText={setPassword} // パスワードが変更されたときのハンドラ
+            placeholder="パスワード"
+            secureTextEntry={true} // パスワード入力を隠す
+          />
+          <View style={styles.inputTittleRow}>
+            <Text style={styles.inputTittle}>パスワード（確認用）</Text>
+            <Image
+              style={styles.need}
+              source={require("../../assets/images/form-hissu.png")}
+            />
+          </View>
+          <TextInput
+            style={styles.input}
+            value={confirmationpassword}
+            onChangeText={setConfirmationpassword}
+            placeholder="パスワード（確認用）"
+          />
+
+          <View style={styles.termsRow}>
+            <Checkbox
+              value={agreeToTerms}
+              onValueChange={(newValue) => setAgreeToTerms(newValue)}
+            />
+            <TouchableOpacity onPress={openTermsModal}>
+              <Text style={styles.termsText}>利用規約に同意する</Text>
+            </TouchableOpacity>
+          </View>
+
+          <Modal animationType="slide" transparent={true} visible={termsModal}>
+            <SafeAreaView>
+              <ScrollView>
+                <View style={styles.modalContainer}>
+                  <View style={styles.modalView}>
+                    <Text style={styles.modalTermsTittle}>利用規約</Text>
+                    <Text>{Terms}</Text>
+                    <TouchableOpacity
+                      style={styles.closeButtonContainer}
+                      onPress={closeTermsModal}
+                    >
+                      <Text style={styles.closeButton}>閉じる</Text>
+                    </TouchableOpacity>
+                  </View>
+                </View>
+              </ScrollView>
+            </SafeAreaView>
+          </Modal>
+
+          <YellowButton
+            style={{ marginBottom: 1 }} // ここで下マージンを設定
+            label="お子さまの登録へ"
+            disabled={!agreeToTerms}
+            onPress={() => {
+              navigation.reset({
+                index: 0,
+                routes: [{ name: "アカウント作成2" }],
+              });
+            }}
+          />
+          <GrayButton
+            style={{ marginBottom: 60 }} // ここで下マージンを設定
+            label="キャンセル"
+            onPress={() => {
+              navigation.reset({
+                index: 0,
+                routes: [{ name: "ログイン" }],
+              });
+            }}
+          />
+        </View>
+      </ScrollView>
+
+      <TouchableOpacity
+        onPress={() => Linking.openURL("https://raretech.site/")}
+      >
+        <View style={styles.footer}>
+          <Text style={styles.footerText1}>presented by</Text>
           <Image
-            style={styles.steps}
-            source={require("../../assets/images/step-1-4.png")}
+            style={styles.logo}
+            source={require("../../assets/images/RareTECH_white.png")}
           />
-          <Text style={styles.titleText}>保護者さまの登録</Text>
+          <Text style={styles.footerText2}>
+            このアプリはプログラミングスクール受講生が作りました
+          </Text>
         </View>
-
-        <View style={styles.inputTittleRow}>
-          <Text style={styles.inputTittle}>アカウント名</Text>
-          <Text style={styles.need}>必須</Text>
-        </View>
-        <TextInput
-          style={styles.input}
-          value="username"
-          placeholder="アカウント名<"
-        />
-        <Text style={styles.inputTittle}>アプリ内表示名</Text>
-        <TextInput
-          style={styles.input}
-          value="nickname"
-          placeholder="アプリ内表示名"
-        />
-        <Text style={styles.inputTittle}>メールアドレス</Text>
-        <TextInput
-          style={styles.input}
-          value="email"
-          placeholder="メールアドレス"
-          autoCapitalize="none"
-        />
-        <Text style={styles.inputTittle}>パスワード</Text>
-        <TextInput
-          style={styles.input}
-          value="password"
-          placeholder="パスワード"
-        />
-        <Text style={styles.inputTittle}>パスワード（確認用）</Text>
-        <TextInput
-          style={styles.input}
-          value="confirmationPassword"
-          placeholder="パスワード（確認用）"
-        />
-        <View style={styles.termsRow}>
-          <Checkbox
-            value={agreeToTerms}
-            onValueChange={(newValue) => setAgreeToTerms(newValue)}
-          />
-          <Text style={styles.termsText}>利用規約に同意する</Text>
-        </View>
-
-        <YellowButton
-          label="お子さまの登録へ"
-          disabled={!agreeToTerms}
-          onPress={() => {
-            navigation.reset({
-              index: 0,
-              routes: [{ name: "アカウント作成2" }],
-            });
-          }}
-        />
-        <GrayButton
-          label="キャンセル"
-          onPress={() => {
-            navigation.reset({
-              index: 0,
-              routes: [{ name: "ログイン" }],
-            });
-          }}
-        />
-      </View>
-      <View style={styles.footer}>
-        <Text style={styles.footerText1}>presented by</Text>
-        <Image
-          style={styles.logo}
-          source={require("../../assets/images/RareTECH_white.png")}
-        />
-        <Text style={styles.footerText2}>
-          このアプリはプログラミングスクール受講生が作りました
-        </Text>
-      </View>
-    </ScrollView>
+      </TouchableOpacity>
+    </View>
   );
 }
 
@@ -135,6 +218,7 @@ const styles = StyleSheet.create({
 
   inputTittleRow: {
     flexDirection: "row",
+    alignItems: "center",
   },
   inputTittle: {
     fontSize: 16,
@@ -142,10 +226,7 @@ const styles = StyleSheet.create({
     color: "#0F0F0F",
   },
   need: {
-    fontSize: 16,
-    fontWeight: "bold",
-    color: "#ffffff",
-    backgroundColor: "#FEDA30",
+    marginLeft: 8,
   },
 
   input: {
@@ -158,17 +239,54 @@ const styles = StyleSheet.create({
     marginBottom: 24,
     borderRadius: 8,
   },
+
   termsRow: {
     flexDirection: "row", // チェックボックスとテキストを横並びにする
     alignItems: "center", // 中央揃え
-    marginBottom: 24, // 余白
+    marginTop: 60,
   },
   termsText: {
     marginLeft: 8, // チェックボックスとテキストの間の余白
   },
+  modalContainer: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: "rgba(0,0,0, .6)",
+  },
+  modalView: {
+    backgroundColor: "#ffffff",
+    borderRadius: 20,
+    margin: 20,
+    padding: 20,
+    alignItems: "center",
+  },
+  modalTermsTittle: {
+    marginBottom: 20,
+    color: "dodgerblue",
+    fontWeight: "bold",
+    textAlign: "center",
+    fontSize: 18,
+  },
+  closeButtonContainer: {
+    height: 48,
+    backgroundColor: "#ffffff",
+    borderColor: "#BCB7B7",
+    borderWidth: 3,
+    borderRadius: 8,
+    justifyContent: "center", // 中央揃えにするために追加
+    alignItems: "center", // 中央揃えにするために追加
+    marginTop: 32,
+    marginBottom: 32,
+    paddingHorizontal: 20,
+  },
+  closeButton: {
+    fontSize: 18,
+    color: "#0F0F0F",
+  },
 
   footer: {
-    flex: 1,
+    // flex: 1,
     height: 152,
     backgroundColor: "#0F0F0F",
     justifyContent: "center",

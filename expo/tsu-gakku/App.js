@@ -15,15 +15,32 @@ export default function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator
+        initialRouteName="アカウント作成2"
         screenOptions={{
           headerStyle: { backgroundColor: "#FEDA30" },
         }}
       >
         <Stack.Screen name="ログイン" component={LogInScreen} />
-        <Stack.Screen name="アカウント作成1" component={SignUpParentScreen} />
-        <Stack.Screen name="アカウント作成2" component={SignUpChildrenScreen} />
-        <Stack.Screen name="アカウント作成3" component={SignUpConfirmScreen} />
-        <Stack.Screen name="アカウント作成4" component={SignUpCompleteScreen} />
+        <Stack.Screen
+          name="アカウント作成1"
+          component={SignUpParentScreen}
+          options={{ title: "アカウント作成" }}
+        />
+        <Stack.Screen
+          name="アカウント作成2"
+          component={SignUpChildrenScreen}
+          options={{ title: "アカウント作成" }}
+        />
+        <Stack.Screen
+          name="アカウント作成3"
+          component={SignUpConfirmScreen}
+          options={{ title: "アカウント作成" }}
+        />
+        <Stack.Screen
+          name="アカウント作成4"
+          component={SignUpCompleteScreen}
+          options={{ title: "アカウント作成" }}
+        />
         <Stack.Screen name="ホーム" component={HomeDummy} />
       </Stack.Navigator>
     </NavigationContainer>

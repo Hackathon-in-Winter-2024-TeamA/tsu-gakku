@@ -1,5 +1,12 @@
 import React from "react";
-import { View, Text, StyleSheet, Image } from "react-native";
+import {
+  View,
+  Text,
+  StyleSheet,
+  Image,
+  TouchableOpacity,
+  Linking,
+} from "react-native";
 
 import YellowButton from "../components/YellowButton";
 
@@ -12,16 +19,19 @@ export default function SignUpCompleteScreen({ navigation }) {
             style={styles.steps}
             source={require("../../assets/images/step-4-4.png")}
           />
-          <Text style={styles.titleText}>ご登録内容の完了</Text>
+          <Text style={styles.titleText}>ご登録の完了</Text>
         </View>
 
-        <Text>登録が完了しました</Text>
-        <Image
-          style={styles.circle}
-          source={require("../../assets/images/check-circle.png")}
-        />
+        <View style={styles.centerContent}>
+          <Text style={styles.finish}>登録が完了しました</Text>
+          <Image
+            style={styles.circle}
+            source={require("../../assets/images/check-circle.png")}
+          />
+        </View>
 
         <YellowButton
+          style={{ marginTop: 150 }} // ここで下マージンを設定
           label="ホーム画面へ"
           onPress={() => {
             navigation.reset({
@@ -30,6 +40,11 @@ export default function SignUpCompleteScreen({ navigation }) {
             });
           }}
         />
+      </View>
+
+      <TouchableOpacity
+        onPress={() => Linking.openURL("https://raretech.site/")}
+      >
         <View style={styles.footer}>
           <Text style={styles.footerText1}>presented by</Text>
           <Image
@@ -40,7 +55,7 @@ export default function SignUpCompleteScreen({ navigation }) {
             このアプリはプログラミングスクール受講生が作りました
           </Text>
         </View>
-      </View>
+      </TouchableOpacity>
     </View>
   );
 }
@@ -49,58 +64,50 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#ffffff",
+    justifyContent: "space-between", // コンテンツとフッターの間にスペースを設ける
   },
   inner: {
     paddingHorizontal: 18,
-    paddingVertical: 70,
+    paddingVertical: 10,
   },
-  inputTittle: {
-    fontWeight: "bold",
+  titleRow: {
+    flexDirection: "row", // チェックボックスとテキストを横並びにする
+    alignItems: "center", // 中央揃え
+    justifyContent: "flex-start", // 左寄せに変更
+    marginBottom: 24, // 余白
+  },
+  steps: {
+    width: 64,
+    height: 64,
+  },
+  titleText: {
+    fontSize: 18,
     color: "#0F0F0F",
-  },
-  input: {
-    fontSize: 16,
-    height: 48,
-    borderColor: "#BCB7B7",
-    borderWidth: 2,
-    backgroundColor: "#ffffff",
-    paddingHorizontal: 8,
-    marginBottom: 24,
-    borderRadius: 8,
+    fontWeight: "bold",
+    textAlign: "center", // タイトルをテキストの中央に配置
+    flex: 1, // タイトルが残りのスペースをすべて使用するようにする
   },
 
-  forSignInButton: {
-    height: 48,
-    backgroundColor: "#Ffffff",
-    borderColor: "#ffffff",
-    borderTopColor: "#BCB7B7",
-    borderWidth: 2,
-    marginBottom: 32,
+  centerContent: {
+    alignItems: "center",
+    justifyContent: "center",
+    marginTop: 80,
   },
-  forSignInButtonLabel: {
-    fontSize: 16,
+  finish: {
+    fontSize: 20,
     fontWeight: "bold",
-    color: "#0F0F0F",
-    textAlign: "center",
-    paddingVertical: 24,
-    marginBottom: 32,
   },
-  termsOfUseButton: {
-    height: 48,
-    backgroundColor: "#Ffffff",
+  circle: {
+    alignSelf: "center", // 要素自身を中央揃え
+    marginTop: 40, // テキストとの間隔
   },
-  termsOfUseButtonLabel: {
-    fontSize: 16,
-    color: "#0F0F0F",
-    textAlign: "center",
-    paddingVertical: 24,
-  },
+
   footer: {
-    flex: 1,
     height: 152,
     backgroundColor: "#0F0F0F",
     justifyContent: "center",
     alignItems: "center",
+    paddingVertical: 10,
   },
   footerText1: {
     fontSize: 10,

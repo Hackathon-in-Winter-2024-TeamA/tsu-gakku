@@ -1,11 +1,11 @@
 import React from "react";
 import { Text, TouchableOpacity, StyleSheet } from "react-native";
-import { func, string } from "prop-types";
+import { func, string, object } from "prop-types";
 
 export default function GrayButton(props) {
-  const { label, onPress } = props;
+  const { label, onPress, style } = props;
   return (
-    <TouchableOpacity style={styles.buttonContainer} onPress={onPress}>
+    <TouchableOpacity style={[styles.buttonContainer, style]} onPress={onPress}>
       <Text style={styles.buttonLabel}>{label}</Text>
     </TouchableOpacity>
   );
@@ -14,10 +14,12 @@ export default function GrayButton(props) {
 GrayButton.propTypes = {
   label: string.isRequired,
   onPress: func,
+  style: object,
 };
 
 GrayButton.defaultProps = {
   onPress: null,
+  style: {}, // デフォルトで空のオブジェクトを指定
 };
 
 const styles = StyleSheet.create({
@@ -27,6 +29,8 @@ const styles = StyleSheet.create({
     borderColor: "#BCB7B7",
     borderWidth: 3,
     borderRadius: 8,
+    justifyContent: "center", // 中央揃えにするために追加
+    alignItems: "center", // 中央揃えにするために追加
     marginTop: 32,
     marginBottom: 32,
   },

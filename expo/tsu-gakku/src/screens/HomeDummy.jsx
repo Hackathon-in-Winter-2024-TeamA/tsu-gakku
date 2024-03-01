@@ -10,7 +10,7 @@ import {
 
 import YellowButton from "../components/YellowButton";
 
-export default function HomeDummyScreen() {
+export default function HomeDummyScreen({ navigation }) {
   return (
     <View style={styles.container}>
       <View style={styles.inner}>
@@ -27,7 +27,16 @@ export default function HomeDummyScreen() {
           value="Password"
           placeholder="パスワード"
         />
-        <YellowButton label="ホームだよ〜" />
+        <YellowButton
+        label="ホームだよ〜"
+        onPress={() => {
+          navigation.reset({
+            index: 0,
+            routes: [{ name: "出欠席確認画面" }],
+          });
+        }}
+        
+        />
         <TouchableOpacity style={styles.forSignInButton}>
           <Text style={styles.forSignInButtonLabel}>
             アカウントをお持ちでない方はこちら

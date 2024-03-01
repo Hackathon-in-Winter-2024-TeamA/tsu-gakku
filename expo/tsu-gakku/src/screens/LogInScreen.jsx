@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   View,
   Text,
@@ -6,29 +6,39 @@ import {
   TouchableOpacity,
   StyleSheet,
   Image,
-  Alert,
+  Linking,
 } from "react-native";
 
 import YellowButton from "../components/YellowButton";
 
 export default function LogInScreen(props) {
   const { navigation } = props;
+  const [email, setEmail] = useState(""); // メールアドレス用の状態
+  const [password, setPassword] = useState(""); // パスワード用の状態
+
   return (
     <View style={styles.container}>
       <View style={styles.inner}>
-        <Text style={styles.inputTittle}>メールアドレス</Text>
-        <TextInput
-          style={styles.input}
-          value="Email Address"
-          placeholder="メールアドレス"
-        />
-        <Text style={styles.inputTittle}>パスワード</Text>
-        <TextInput
-          style={styles.input}
-          value="Password"
-          placeholder="パスワード"
-        />
+        <View style={styles.inputArea}>
+          <Text style={styles.inputTittle}>メールアドレス</Text>
+          <TextInput
+            style={styles.input}
+            value={email}
+            onChangeText={setEmail} // メールアドレスが変更されたときのハンドラ
+            placeholder="メールアドレス"
+            autoCapitalize="none"
+          />
+          <Text style={styles.inputTittle}>パスワード</Text>
+          <TextInput
+            style={styles.input}
+            value={password}
+            onChangeText={setPassword} // パスワードが変更されたときのハンドラ
+            placeholder="パスワード"
+            secureTextEntry={true} // パスワード入力を隠す
+          />
+        </View>
         <YellowButton
+          style={{ marginTop: 60 }} // ここで下マージンを設定
           label="ログイン"
           onPress={() => {
             navigation.reset({
@@ -37,6 +47,7 @@ export default function LogInScreen(props) {
             });
           }}
         />
+        <View style={styles.separator} />
         <TouchableOpacity
           onPress={() => {
             navigation.reset({
@@ -44,9 +55,8 @@ export default function LogInScreen(props) {
               routes: [{ name: "アカウント作成1" }],
             });
           }}
-          style={styles.forSignInButton}
         >
-          <Text style={styles.forSignInButtonLabel}>
+          <Text style={styles.forSignInLabel}>
             アカウントをお持ちでない方はこちら
           </Text>
         </TouchableOpacity>
@@ -54,16 +64,20 @@ export default function LogInScreen(props) {
           <Text style={styles.termsOfUseButtonLabel}>利用規約について</Text>
         </TouchableOpacity>
       </View>
-      <View style={styles.footer}>
-        <Text style={styles.footerText1}>presented by</Text>
-        <Image
-          style={styles.logo}
-          source={require("../../assets/images/RareTECH_white.png")}
-        />
-        <Text style={styles.footerText2}>
-          このアプリはプログラミングスクール受講生が作りました
-        </Text>
-      </View>
+      <TouchableOpacity
+        onPress={() => Linking.openURL("https://raretech.site/")}
+      >
+        <View style={styles.footer}>
+          <Text style={styles.footerText1}>presented by</Text>
+          <Image
+            style={styles.logo}
+            source={require("../../assets/images/RareTECH_white.png")}
+          />
+          <Text style={styles.footerText2}>
+            このアプリはプログラミングスクール受講生が作りました
+          </Text>
+        </View>
+      </TouchableOpacity>
     </View>
   );
 }
@@ -78,9 +92,13 @@ const styles = StyleSheet.create({
     paddingHorizontal: 18,
     paddingVertical: 30,
   },
+  inputArea: {
+    marginTop: 60,
+  },
   inputTittle: {
     fontWeight: "bold",
     color: "#0F0F0F",
+    marginTop: 10,
   },
   input: {
     fontSize: 16,
@@ -93,15 +111,12 @@ const styles = StyleSheet.create({
     borderRadius: 8,
   },
 
-  forSignInButton: {
-    height: 48,
-    backgroundColor: "#Ffffff",
-    borderColor: "#ffffff",
-    borderTopColor: "#BCB7B7",
-    borderWidth: 2,
-    marginBottom: 32,
+  separator: {
+    borderBottomWidth: 2,
+    borderBottomColor: "#BCB7B7",
+    marginBottom: 20,
   },
-  forSignInButtonLabel: {
+  forSignInLabel: {
     fontSize: 16,
     fontWeight: "bold",
     color: "#0F0F0F",

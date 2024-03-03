@@ -36,7 +36,7 @@ export default function SignUpCompleteScreen({ navigation }) {
           onPress={() => {
             navigation.reset({
               index: 0,
-              routes: [{ name: "ホーム" }],
+              routes: [{ name: "メイン" }],
             });
           }}
         />

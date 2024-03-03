@@ -2,13 +2,14 @@ import React from "react";
 
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import { getFocusedRouteNameFromRoute } from "@react-navigation/native";
+
+import BottomTabNavigator from "./src/navigation/BottomTabNavigator";
 import LogInScreen from "./src/screens/LogInScreen";
 import SignUpParentScreen from "./src/screens/SignUpParentScreen";
 import SignUpChildrenScreen from "./src/screens/SignUpChildrenScreen";
 import SignUpConfirmScreen from "./src/screens/SignUpConfirmScreen";
 import SignUpCompleteScreen from "./src/screens/SignUpCompleteScreen";
-import HomeDummy from "./src/screens/HomeDummy"; //hinakanaさんのHomeに変える
-import AttendanceCheckList from "./src/screens/AttendanceCheckList"; //出欠席確認画面
 
 const Stack = createNativeStackNavigator();
 
@@ -16,7 +17,7 @@ export default function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator
-        initialRouteName="アカウント作成2"
+        initialRouteName="ログイン"
         screenOptions={{
           headerStyle: { backgroundColor: "#FEDA30" },
         }}
@@ -42,8 +43,27 @@ export default function App() {
           component={SignUpCompleteScreen}
           options={{ title: "アカウント作成" }}
         />
-        <Stack.Screen name="ホーム" component={HomeDummy} />
-        <Stack.Screen name="出欠席確認画面" component={AttendanceCheckList} />
+        {/* メインアプリフローのスクリーン */}
+        <Stack.Screen
+          name="メイン"
+          component={BottomTabNavigator}
+          options={({ route }) => {
+            // BottomTabNavigator内の現在アクティブなタブのルート名を取得
+            const routeName = getFocusedRouteNameFromRoute(route) ?? "ホーム";
+
+            let headerTitle;
+            if (routeName === "出欠確認") {
+              // 出欠確認タブの場合
+              headerTitle = "出欠席確認ページ";
+            } else {
+              // 他のタブの場合
+              headerTitle = routeName; // ボトムタブの`name`をそのまま使用
+            }
+
+            // ルート名に基づいてヘッダータイトルを設定
+            return { title: headerTitle };
+          }}
+        />
       </Stack.Navigator>
     </NavigationContainer>
   );

@@ -7,15 +7,13 @@ import {
   StyleSheet,
   Image,
   TouchableOpacity,
-  SafeAreaView,
-  Modal,
   Linking,
 } from "react-native";
 import Checkbox from "expo-checkbox";
 
 import YellowButton from "../components/YellowButton";
 import GrayButton from "../components/GrayButton";
-import Terms from "../components/Terms";
+import TermsModal from "../components/TermsModal";
 
 export default function SignUpParentScreen({ navigation }) {
   const [username, setUsername] = useState("");
@@ -29,7 +27,6 @@ export default function SignUpParentScreen({ navigation }) {
   const openTermsModal = () => {
     setTermsModal(true);
   };
-
   const closeTermsModal = () => {
     setTermsModal(false);
   };
@@ -124,24 +121,7 @@ export default function SignUpParentScreen({ navigation }) {
             </TouchableOpacity>
           </View>
 
-          <Modal animationType="slide" transparent={true} visible={termsModal}>
-            <SafeAreaView>
-              <ScrollView>
-                <View style={styles.modalContainer}>
-                  <View style={styles.modalView}>
-                    <Text style={styles.modalTermsTittle}>利用規約</Text>
-                    <Text>{Terms}</Text>
-                    <TouchableOpacity
-                      style={styles.closeButtonContainer}
-                      onPress={closeTermsModal}
-                    >
-                      <Text style={styles.closeButton}>閉じる</Text>
-                    </TouchableOpacity>
-                  </View>
-                </View>
-              </ScrollView>
-            </SafeAreaView>
-          </Modal>
+          <TermsModal visible={termsModal} onClose={closeTermsModal} />
 
           <YellowButton
             style={{ marginBottom: 1 }} // ここで下マージンを設定
@@ -190,9 +170,9 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: "#ffffff",
   },
-  contentContainer: {
-    flexGrow: 1, // これにより、コンテンツが少ない場合でもフッターが下部に表示される
-  },
+  // contentContainer: {
+  //   flexGrow: 1, // これにより、コンテンツが少ない場合でもフッターが下部に表示される
+  // },
   inner: {
     paddingHorizontal: 18,
     paddingVertical: 10,
@@ -244,45 +224,6 @@ const styles = StyleSheet.create({
     flexDirection: "row", // チェックボックスとテキストを横並びにする
     alignItems: "center", // 中央揃え
     marginTop: 60,
-  },
-  termsText: {
-    marginLeft: 8, // チェックボックスとテキストの間の余白
-  },
-  modalContainer: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-    backgroundColor: "rgba(0,0,0, .6)",
-  },
-  modalView: {
-    backgroundColor: "#ffffff",
-    borderRadius: 20,
-    margin: 20,
-    padding: 20,
-    alignItems: "center",
-  },
-  modalTermsTittle: {
-    marginBottom: 20,
-    color: "dodgerblue",
-    fontWeight: "bold",
-    textAlign: "center",
-    fontSize: 18,
-  },
-  closeButtonContainer: {
-    height: 48,
-    backgroundColor: "#ffffff",
-    borderColor: "#BCB7B7",
-    borderWidth: 3,
-    borderRadius: 8,
-    justifyContent: "center", // 中央揃えにするために追加
-    alignItems: "center", // 中央揃えにするために追加
-    marginTop: 32,
-    marginBottom: 32,
-    paddingHorizontal: 20,
-  },
-  closeButton: {
-    fontSize: 18,
-    color: "#0F0F0F",
   },
 
   footer: {
